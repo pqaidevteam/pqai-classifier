@@ -1,3 +1,5 @@
+_Note: This repository is under active development and not ready for production yet._
+
 # PQAI Classifier Service
 
 REST API for accessing ML models trained for associating labels (e.g., CPC subclasses) with
@@ -5,9 +7,9 @@ text snippets.
 
 ## Routes
 
-|      | Method   | Endpoint                   | Comments                                         |
-| ---- | -------- | -------------------------- | ------------------------------------------------ |
-|      | `GET`    | `/classify`                | Return subclass predictions for given text       |
+| Method   | Endpoint                   | Comments                                         |
+| -------- | -------------------------- | ------------------------------------------------ |
+| `GET`    | `/classify`                | Return subclass predictions for given text       |
 
 ## License
 
