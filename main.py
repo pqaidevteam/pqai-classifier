@@ -1,9 +1,8 @@
 import os
-import dotenv
+from typing import Optional
 import uvicorn
-from pydantic import BaseModel
-from typing import Union, Optional
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
+import dotenv
 
 dotenv.load_dotenv()
 

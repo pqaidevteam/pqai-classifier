@@ -3,6 +3,7 @@ __pycache__/
 *$py.class
 
 .env
+pylintrc
 .venv
 env/
 venv/
@@ -12,3 +13,7 @@ venv.bak/
 
 /assets/*
 !assets/README.md
+
+.env
+/htmlcov
+/.coverage

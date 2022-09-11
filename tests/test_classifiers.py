@@ -14,6 +14,8 @@ from core.classifiers import BOWSubclassPredictor, BERTSubclassPredictor
 
 
 class TestBOWSubclassPredictor(unittest.TestCase):
+    "Tests for predicting the correct subclasses for the BOW-vectors based model"
+
     def test__can_classify(self):
         classifier = BOWSubclassPredictor()
         expected = ["G10L", "G06F", "G06Q", "H05K", "H01R"]
@@ -22,6 +24,8 @@ class TestBOWSubclassPredictor(unittest.TestCase):
 
 
 class TestBERTSubclassPredictor(unittest.TestCase):
+    "Tests for predicting the correct subclasses for the BERT model"
+
     def test__can_classify(self):
         classifier = BERTSubclassPredictor()
         expected = ["G06F", "G10L", "G09B", "G06Q", "G06T"]
