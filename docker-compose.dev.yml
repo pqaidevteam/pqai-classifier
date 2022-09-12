@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 
 services:
   pqai_classifier_api:
