@@ -7,13 +7,15 @@ import dotenv
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
-from core.classifiers import BOWSubclassPredictor, BERTSubclassPredictor
 
 dotenv.load_dotenv()
+
+from core.classifiers import BOWSubclassPredictor, BERTSubclassPredictor
+
 app = FastAPI()
 
 
-class Item(BaseModel):
+class ClassificationRequest(BaseModel):
     """Class for defining input parameters data type"""
 
     text: str
@@ -22,13 +24,11 @@ class Item(BaseModel):
 
 
 @app.post("/classify")
-async def classify(item: Item):
+async def classify(item: ClassificationRequest):
     """Find relevant CPC technology subclasses for a given text snippet.
 
     Args:
-    text (str): Input text.
-    n (int, optional): Number of subclasses to return.
-    model (str): Model name
+
     Returns:
     list: Array of subclass codes, most relevant first.
     """
