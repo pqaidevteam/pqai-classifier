@@ -27,8 +27,6 @@ class ClassificationRequest(BaseModel):
 async def classify(item: ClassificationRequest):
     """Find relevant CPC technology subclasses for a given text snippet.
 
-    Args:
-
     Returns:
     list: Array of subclass codes, most relevant first.
     """
