@@ -17,6 +17,22 @@ text snippets.
 | -------- | -------------------------- | ------------------------------------------------ |
 | `GET`    | `/classify`                | Return subclass predictions for given text       |
 
+## How to run?
+
+### From command line
+
+1. Clone this repository
+1. Download required [assets](https://s3.amazonaws.com/pqai.s3/public/pqai-assets-latest.zip) and extract them to `/assets` directory
+1. Create a `.env` file using `/env` template and set environment variable values
+1. Create a virtual environment and install dependencies: `pip install -r requirements.txt`
+1. Run the service: `python3 main.py`
+
+### As docker container
+
+1. Clone this repository
+1. Create a `.env` file using `/env` template and set environment variable values
+1. Run as docker container:`docker-compose up -d`
+
 ## License
 
 The project is open-source under the MIT license.

@@ -1,27 +1,46 @@
+"""Server file
+Attributes:
+    app (fastapi.applications.FastAPI): Fast API app
+"""
 import os
 import dotenv
 import uvicorn
+from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import Union, Optional
-from fastapi import FastAPI, Response
 
 dotenv.load_dotenv()
 
-# pylint: disable=wrong-import-position
 from core.classifiers import BOWSubclassPredictor, BERTSubclassPredictor
 
 app = FastAPI()
 
 
-@app.get("/subclasses")
-async def predict_subclasses(
-    text: str,
-    n: Optional[int] = 5,
-    predictor: Optional[str] = "bert-subclass-predictor",
-):
-    """Return subclass predictions for given text snippet"""
-    classifier = BERTSubclassPredictor()
-    return classifier.predict_subclasses(text, n)
+class ClassificationRequest(BaseModel):
+    """Class for defining input parameters data type"""
+
+    text: str
+    n: str
+    model: str
+
+
+@app.post("/classify")
+async def classify(item: ClassificationRequest):
+    """Find relevant CPC technology subclasses for a given text snippet.
+
+    Returns:
+    list: Array of subclass codes, most relevant first.
+    """
+
+    data = item
+    text = data.text
+    n_sub_classes = int(data.n)
+    if data.model == "BOWSubclassPredictor":
+        model = BOWSubclassPredictor()
+    else:
+        model = BERTSubclassPredictor()
+
+    sub_classes = model.predict_subclasses(text, n_sub_classes)
+    return sub_classes
 
 
 if __name__ == "__main__":
