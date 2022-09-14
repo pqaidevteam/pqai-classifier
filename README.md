@@ -25,14 +25,13 @@ text snippets.
 1. Download required [assets](https://s3.amazonaws.com/pqai.s3/public/assets-pqai-classifier.zip) and extract them to `/assets` directory
 1. Create a `.env` file using `/env` template and set environment variable values
 1. Create a virtual environment and install dependencies: `pip install -r requirements.txt`
-1. Make sure the [classifier service](https://github.com/pqaidevteam/pqai-classifier) is running and properly configured in `.env` file
 1. Run the service: `python3 main.py`
 
 ### As docker container
 
 1. Clone this repository
 1. Create a `.env` file using `/env` template and set environment variable values
-1. To run the docker container use the command:`sudo docker compose up`
+1. Run as docker container:`docker-compose up -d`
 
 ## License
 
