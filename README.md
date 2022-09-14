@@ -31,7 +31,8 @@ text snippets.
 
 1. Clone this repository
 1. Create a `.env` file using `/env` template and set environment variable values
-1. Run as docker container:`docker-compose up -d`
+1. Give execution permission to the deployment script: `chmod +x deploy.sh`
+1. Run deployment script: `bash deploy.sh`
 
 ## License
 
