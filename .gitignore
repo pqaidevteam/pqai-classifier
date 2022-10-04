@@ -16,3 +16,4 @@ venv.bak/
 .env
 /htmlcov
 /.coverage
+/.vscode

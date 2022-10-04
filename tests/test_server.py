@@ -1,69 +1,37 @@
 """Test for service API
-Attributes:
-    dotenv_file (str): Absolute path to .env file (used for reading port no.)
-    HOST (str): IP address of the host where service is running
-    PORT (str): Port no. on which the server is listening
-    PROTOCOL (str): `http` or `https`
 """
-import os
+
 import sys
 import json
 import unittest
-import socket
 from pathlib import Path
-import requests
 from dotenv import load_dotenv
+from fastapi.testclient import TestClient
 
-env_file = str((Path(__file__).parent.parent / ".env").resolve())
-load_dotenv(env_file)
+BASE_DIR = Path(__file__).resolve().parent.parent
+TEST_DIR = Path(__file__).resolve().parent
+ENV_PATH = BASE_DIR / ".env"
 
-test_dir = str(Path(__file__).parent.resolve())
-BASE_DIR = Path(__file__).parent.parent
-sys.path.append(str(BASE_DIR.resolve()))
+sys.path.append(BASE_DIR.as_posix())
+load_dotenv(ENV_PATH.as_posix())
 
-PROTOCOL = "http"
-HOST = "localhost"
-PORT = os.environ["PORT"]
-API_ENDPOINT = "{}://{}:{}".format(PROTOCOL, HOST, PORT)
+from main import app
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_not_running = sock.connect_ex((HOST, int(PORT))) != 0
-
-if server_not_running:
-    print("Server is not running. API tests will be skipped.")
-
-
-@unittest.skipIf(server_not_running, "Works only when true")
 class TestAPI(unittest.TestCase):
-    """For testing server api"""
 
     def setUp(self):
-        """Initial setup"""
-        self.file_path = test_dir + "/test-data/patents/US11325698B2.json"
+        self.client = TestClient(app)
+        self.file_path = TEST_DIR.as_posix() + "/test-data/patents/US11325698B2.json"
 
     def test_classify_route(self):
-        """Tests the server api request route"""
         with open(self.file_path, "r") as test_file:
             test_data = json.load(test_file)
         input_text = test_data["abstract"]
         text = input_text
         n = 5
         data = {"text": text, "n": n, "model": "BOWSubclassPredictor"}
-        response = self.call_route("/classify", data=data)
+        response = self.client.post("/classify", json=data)
         self.assertEqual(200, response.status_code)
-
-    def call_route(self, route, data):
-        """Make request to given route with given parameters
-        Args:
-            route (str): Route, e.g. '/search'
-            params (dict): Query string parameters
-        Returns:
-            response: Response against HTTP request
-        """
-        route = route.lstrip("/")
-        url = f"{PROTOCOL}://{HOST}:{PORT}/{route}"
-        response = requests.post(url, json=data)
-        return response
 
 
 if __name__ == "__main__":
