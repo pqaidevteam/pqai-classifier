@@ -23,4 +23,4 @@ fi
 
 docker build . -t pqai_classifier:latest
 docker-compose down
-docker-compose up
+docker-compose up -d
