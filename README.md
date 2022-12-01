@@ -9,6 +9,8 @@
 REST API for accessing ML models trained for associating labels (e.g., CPC subclasses) with
 text snippets.
 
+For more detailed information, please refer to [PQAI Wiki](https://github.com/pqaidevteam/pqai/wiki/pqai-classifier).
+
 ## Routes
 
 | Method | Endpoint    | Comments                                   |
